@@ -1,5 +1,5 @@
 // server.js
-import 'dotenv/config' // must be before anything that uses process.env
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import connectDB from './config/mongodb.js'
@@ -13,8 +13,8 @@ import reviewRouter from "./api/reviewRoute.js";
 import voucherRouter from "./api/voucherRoute.js";
 import translateRouter from "./api/translateRoute.js";
 import dashboardRouter from "./api/dashboardRoute.js";
-import customerRouter from "./api/customerRoute.js"
-import settingsRouter from './api/settingsRoute.js'
+import customerRouter from "./api/customerRoute.js";
+import settingsRouter from './api/settingsRoute.js';
 import path from "path";
 
 // App Config
@@ -25,12 +25,23 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+
+// ✅ CORS configuration
+app.use(cors({
+  origin: [
+    "https://zaybees.vercel.app",
+    "https://zaybees-d8pm-krtssjzu5-jannat-faisals-projects.vercel.app",
+    "https://admin-zaybees.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+}));
+
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // api endpoints
 app.use('/api/user', userRouter)
-app.use('/api/product',productRouter)
+app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 app.use("/api/payment", paymentRouter);

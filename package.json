@@ -1,11 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "App.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node App.js",
+    "server": "nodemon App.js"
   },
   "author": "",
   "license": "ISC",
